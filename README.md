@@ -1,1 +1,1 @@
-# RCSubmitHub
+# RCSubmit
