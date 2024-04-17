@@ -1,0 +1,63 @@
+body {
+  background-color: rgb(26,25,25);
+  color: white;
+}
+
+/*********** LAYOUT ***********/
+.tableDiv{
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+table{
+  /* table-layout:fixed; */
+  background-color: rgb(71, 68, 68);  
+  border-spacing: 0;
+}
+
+thead {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border-bottom: 1px solid rgb(226, 226, 226);
+
+}
+
+/*********** HEADING SPACING ***********/
+table th {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(166, 163, 163);
+}
+
+/*********** STUDENT HEADER ***********/
+th:first-child {
+  font-size: larger;
+}
+
+/*********** FIRST COLUMN, STICKY ***********/
+th:first-child, td:first-child, thead{
+  background-color: rgba(0, 0, 0,.8);
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  margin: 20px;
+  width: 500px;
+  padding: 5px;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(166, 163, 163);
+  text-align: left;
+}
+
+/*********** ALTERNATING ROWS ***********/
+tbody tr:nth-child(odd), thead th:nth-child(odd) {
+  background-color: #292929;
+  color: #fff;
+}
+
+/*********** ICONS ***********/
+.icon{
+  width: 20px;
+}
+
+.fa-square-check {
+  color: rgb(74, 199, 74)
+}
