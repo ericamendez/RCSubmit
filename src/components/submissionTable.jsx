@@ -22,6 +22,156 @@ const students= [
     student: "Muji Satoshi",
     assignmentsSubmitted: [2],
   },
+  {
+    id: 5,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 6,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 7,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 8,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 9,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 10,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 11,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 12,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 13,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 14,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 15,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 16,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 17,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 18,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 19,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 20,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 21,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 22,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 23,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 24,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 25,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 26,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 27,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 28,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 29,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 30,
+    student: "Erica Mendez",
+    assignmentsSubmitted: [1, 2],
+  },
+  {
+    id: 31,
+    student: "Olivia Carolina Gonzalez",
+    assignmentsSubmitted: [1, 2, 3, 5],
+  },
+  {
+    id: 32,
+    student: "Quisqueya La Bella",
+    assignmentsSubmitted: [1,4],
+  },
+  {
+    id: 33,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
+  {
+    id: 34,
+    student: "Muji Satoshi",
+    assignmentsSubmitted: [2],
+  },
 ]
 
 const assignments= [{
@@ -86,6 +236,14 @@ const assignments= [{
 },
 {
   id: 16,
+  name: 'test'
+},
+{
+  id: 17,
+  name: 'test'
+},
+{
+  id: 18,
   name: 'test'
 },
 ]

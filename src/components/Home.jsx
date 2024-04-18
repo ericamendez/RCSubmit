@@ -9,7 +9,7 @@ import SubmissionView from './SubmissionView'
 import { useState } from 'react'
 
 function Home () {
-
+  const [user, setUser] = useState('student')
   const [selectedView, setSelectedView] = useState('home')
 
   const getSelectedView = (path) => {
@@ -54,7 +54,7 @@ function Home () {
           {/* either show student home or admin home */}
           {/* student or admin */}
           <Routes>
-              <Route path="/" element={<StudentView />} />
+              <Route path="/" element={user === 'admin' ? <AdminView /> : <StudentView />} />
               <Route path="/submissionView" element={<SubmissionView />} />
           </Routes>
 
