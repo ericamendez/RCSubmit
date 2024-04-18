@@ -8,6 +8,7 @@ table{
   /* table-layout:fixed; */
   background-color: rgb(69, 68, 70);  
   border-spacing: 0;
+  width: 0%;
 }
 
 thead {
@@ -55,4 +56,12 @@ tbody tr:nth-child(odd), thead th:nth-child(odd) {
 
 .fa-square-check {
   color: rgb(74, 199, 74)
+}
+
+.subContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 8%;
+  display: inline-block;
 }

@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import SubmissionView from './components/SubmissionView'
-import StudentHome from './components/StudentHome'
+import Home from './components/Home'
 import './App.css'
 
 function App() {
 
   return (
     <div>
-      <StudentHome />
-      {/* <SubmissionView /> */}
+      <Home />
     </div>
   )
 }

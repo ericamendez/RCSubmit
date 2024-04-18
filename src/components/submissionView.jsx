@@ -4,8 +4,8 @@ import '../styles/submission.css'
 function SubmissionView() {
 
     return (
-      <div>
-        <h1>2024B Submissions</h1>
+      <div className="subContainer">
+        <h2>2024B</h2>
         <SubmissionTable />
       </div>
     )
