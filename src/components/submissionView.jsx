@@ -1,5 +1,5 @@
-import SubmissionTable from "./submissionTable"
-import '../submissions.css'
+import SubmissionTable from "./SubmissionTable"
+import '../styles/submission.css'
 
 function SubmissionView() {
 
