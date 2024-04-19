@@ -1,15 +1,23 @@
+import { useState } from 'react'
+import {Routes, Route, Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPen, faHouse, faBookOpen, faCircleUser} from "@fortawesome/free-solid-svg-icons"
+import {
+  faPen, 
+  faHouse, 
+  faBookOpen, 
+  faCircleUser, 
+  faCommentDots,
+  faHeart} from "@fortawesome/free-solid-svg-icons"
 import '../styles/home.css'
 import AdminView from './AdminView'
 import StudentView from './StudentView'
-import logo from '../assets/logo.png'
-import {Routes, Route, Link} from 'react-router-dom'
 import SubmissionView from './SubmissionView'
-import { useState } from 'react'
+import ResourcesView from './ResourcesView'
+import logo from '../assets/logo.png'
+import SubmitView from './SubmitView'
 
 function Home () {
-  const [user, setUser] = useState('student')
+  const [user, setUser] = useState('admin')
   const [selectedView, setSelectedView] = useState('home')
 
   const getSelectedView = (path) => {
@@ -36,12 +44,12 @@ function Home () {
             </Link>
             <Link to="/resources">
               <div onClick={() => getSelectedView('resources')} className={selectedView === 'resources' ? 'selected' : null}>
-                <FontAwesomeIcon className="navIcons" icon={faPen} />
+                <FontAwesomeIcon className="navIcons" icon={faHeart} />
               </div>
             </Link>
             <Link to="/misc">
               <div onClick={() => getSelectedView('misc')} className={selectedView === 'misc' ? 'selected' : null}>
-                <FontAwesomeIcon className="navIcons" icon={faPen} />
+                <FontAwesomeIcon className="navIcons" icon={faCommentDots} />
               </div>
             </Link>
         </div>
@@ -55,7 +63,9 @@ function Home () {
           {/* student or admin */}
           <Routes>
               <Route path="/" element={user === 'admin' ? <AdminView /> : <StudentView />} />
-              <Route path="/submissionView" element={<SubmissionView />} />
+              <Route path="/submit" element={<SubmitView />} />
+              <Route path="/submissionView" element={user === 'admin' ? <SubmissionView />: null} />
+              <Route path="/resources" element={<ResourcesView />} />
           </Routes>
 
         </main>
