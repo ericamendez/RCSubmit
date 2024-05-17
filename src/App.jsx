@@ -1,14 +1,15 @@
-import { useState } from 'react'
-import SubmissionView from './components/SubmissionView'
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
 import Home from './components/Home'
 import './App.css'
 
 function App() {
 
   return (
-    <div>
+    <Router>
       <Home />
-    </div>
+    </Router>
   )
 }
 
