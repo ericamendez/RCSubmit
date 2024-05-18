@@ -74,7 +74,7 @@ tbody tr:nth-child(odd), thead th:nth-child(odd) {
 }
 
 .fa-square-check {
-  color: rgb(74, 199, 74)
+  color: rgb(75, 191, 104)
 }
 
 .tableDiv::-webkit-scrollbar, .subViewContainer::-webkit-scrollbar {

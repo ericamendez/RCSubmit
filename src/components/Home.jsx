@@ -16,13 +16,14 @@ import ResourcesView from './ResourcesView'
 import logo from '../assets/logo.png'
 import SubmitView from './SubmitView'
 
-function Home () {
+function Home ({logout}) {
   const [user, setUser] = useState('admin')
   const [selectedView, setSelectedView] = useState('home')
+  const [isHover, setIsHover] = useState(false)
 
   const getSelectedView = (path) => {
     setSelectedView(path)
-  }
+  }  
 
   return (
     <div>
@@ -57,12 +58,19 @@ function Home () {
           <header>
             <div className="logo"><img src={logo} alt="logo" /></div>
             <div className='welcome'>Welcome Erica!</div>
-            <div className='user'><FontAwesomeIcon className="userIcon" icon={faCircleUser} /></div>
+            <div className='user' onMouseEnter={() => setIsHover(true)} 
+                onMouseLeave={() => setIsHover(false)} >
+              <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
+              <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
+                <li><a href="#">Edit Profile</a></li>
+                <li><a onClick={logout}>Logout</a></li>
+              </ul>
+            </div>
           </header>
           {/* either show student home or admin home */}
           {/* student or admin */}
           <Routes>
-              <Route path="/" element={user === 'admin' ? <AdminView /> : <StudentView />} />
+              <Route path="/" element={user === 'admin' ? <AdminView className="inner" /> : <StudentView className="inner" />} />
               <Route path="/submit" element={<SubmitView />} />
               <Route path="/submissionView" element={user === 'admin' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />

@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-      <Home />
+      <Home logout={logout} />
     </Router>
   )
 }

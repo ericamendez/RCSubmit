@@ -47,11 +47,12 @@
 /*********** HEADER ***********/
 header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
 }
 
 header img{
     width: 85px;
+    opacity: .8;
 }
 
 .logo{
@@ -84,6 +85,47 @@ body::-webkit-scrollbar {
     outline: 1px solid slategrey;
   }
 
+/*********** PROFILE HOVER ***********/
+  .profile{
+    position: relative;
+    list-style: none;
+    text-align: right;
+    margin: 0;
+  }
+
+  .inner, .outer {
+    position: absolute;
+}
+.outer{
+    right:75px;
+    background: rgb(120, 120, 188);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.outer li{
+    padding: 10px;
+}
+.outer li:hover{
+    border-radius: 10px;
+    background-color: rgba(97, 94, 94, .3);
+
+}
+
+.outer a{
+    text-decoration: none;
+    color: white;
+}
+
+.inner {
+    z-index: 10;
+    margin: 30px;
+  }	
+
+  .hidden{
+    display: none;
+  }
 /*********** MAIN CONTENT ***********/
 .mainContainer{
     margin-left: 9%;
@@ -123,7 +165,7 @@ body::-webkit-scrollbar {
 /*********** ADMIN ***********/
 .adminTop{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
     grid-gap: 2em;
     text-align: left;
 }

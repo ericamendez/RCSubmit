@@ -28,11 +28,12 @@ const LoginForm = ({setToken}) => {
       }, []) // Empty dependency array ensures this effect runs only once on mount
     
       useEffect(() => {
+        console.log(result.data);
         if ( result.data ) {
           const token = result.data.login.value
           setToken(token)
           localStorage.setItem('tasks-token', token)
-          localStorage.setItem('user', username)
+          // localStorage.setItem('user', username)
         }
       }, [result.data])
     
