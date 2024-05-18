@@ -15,9 +15,9 @@ import SubmissionView from './SubmissionView'
 import ResourcesView from './ResourcesView'
 import logo from '../assets/logo.png'
 import SubmitView from './SubmitView'
+import EditProfile from './EditProfile'
 
-function Home ({logout}) {
-  const [user, setUser] = useState('admin')
+function Home ({user, logout}) {
   const [selectedView, setSelectedView] = useState('home')
   const [isHover, setIsHover] = useState(false)
 
@@ -62,7 +62,11 @@ function Home ({logout}) {
                 onMouseLeave={() => setIsHover(false)} >
               <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
               <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
-                <li><a href="#">Edit Profile</a></li>
+                <li>
+                  <Link to="/profile">
+                    <a href="#">Edit Profile</a>
+                  </Link>
+                </li>
                 <li><a onClick={logout}>Logout</a></li>
               </ul>
             </div>
@@ -70,10 +74,11 @@ function Home ({logout}) {
           {/* either show student home or admin home */}
           {/* student or admin */}
           <Routes>
-              <Route path="/" element={user === 'admin' ? <AdminView className="inner" /> : <StudentView className="inner" />} />
+              <Route path="/" element={user.accountType === 'admin' || user.accountType === 'owner' ? <AdminView className="inner" /> : <StudentView className="inner" />} />
               <Route path="/submit" element={<SubmitView />} />
               <Route path="/submissionView" element={user === 'admin' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />
+              <Route path="/profile" element={<EditProfile />} />
           </Routes>
 
         </main>

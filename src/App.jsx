@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm'
 import './App.css'
 
 function App() {
-
+  const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
   const client = useApolloClient()
 
@@ -22,14 +22,17 @@ function App() {
   if (!token) {
     return (
       <>
-        <LoginForm setToken={setToken} setError={"notify"} />
+        <LoginForm setToken={setToken} setError={"notify"} setUser={setUser} />
       </>
     )
   }
 
   return (
     <Router>
-      <Home logout={logout} />
+      {user ? 
+        <Home logout={logout} user={user} /> : 
+        <LoginForm setToken={setToken} setError={"notify"} setUser={setUser} />
+      }
     </Router>
   )
 }

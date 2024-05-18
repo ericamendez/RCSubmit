@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN, SIGNUP } from '../queries'
 
-const LoginForm = ({setToken}) => {
+const LoginForm = ({setToken, setUser}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [getSignup, setGetSignup] = useState(false)
@@ -24,6 +24,7 @@ const LoginForm = ({setToken}) => {
         const token = localStorage.getItem('tasks-token')
         if (token) {
           setToken(token)
+          console.log(result);
         }
       }, []) // Empty dependency array ensures this effect runs only once on mount
     
@@ -33,7 +34,11 @@ const LoginForm = ({setToken}) => {
           const token = result.data.login.value
           setToken(token)
           localStorage.setItem('tasks-token', token)
-          // localStorage.setItem('user', username)
+          setUser({
+            username: result.data.login.username,
+            id: result.data.login.id,
+            accountType: result.data.login.accountType
+          })
         }
       }, [result.data])
     
