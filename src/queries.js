@@ -18,3 +18,19 @@ export const SIGNUP = gql`
     }
   }
 `
+
+export const GET_USER_DATA = gql`
+  query GetUser($token: String!) {
+    user(token: $token) {
+      id
+      username
+      accountType
+    }
+  }
+`;
+
+export const UPLOAD_PROFILE_PICTURE = gql`
+  mutation UploadProfilePicture($file: Upload!) {
+    uploadProfilePicture(file: $file)
+  }
+`

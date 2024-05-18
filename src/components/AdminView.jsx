@@ -168,6 +168,18 @@ const AdminView = () => {
                     </ul>
                 </section>
             </section>
+            <section>
+                <section >
+                    <p>Have a edit due date</p>
+                    <p>Select Current Cohort dropdown/Create New Cohort</p>
+                    <p>(current cohort will just have the group of students as an array.)</p>
+                    <p>(each student will be associated to work the submit each week.)</p>
+                    <p>(every week we move forward to will open a new group of possible submissions)</p>
+
+                    <p>when students submit, show green if assigment submitted on time, yellow if submitted past due date</p>
+                    <p>View Previous Cohort</p>
+                </section>
+            </section>
         </div>
     )
 }

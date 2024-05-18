@@ -76,7 +76,7 @@ function Home ({user, logout}) {
           <Routes>
               <Route path="/" element={user.accountType === 'admin' || user.accountType === 'owner' ? <AdminView className="inner" /> : <StudentView className="inner" />} />
               <Route path="/submit" element={<SubmitView />} />
-              <Route path="/submissionView" element={user === 'admin' ? <SubmissionView />: null} />
+              <Route path="/submissionView" element={user.accountType === 'admin' || user.accountType === 'owner' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />
               <Route path="/profile" element={<EditProfile />} />
           </Routes>

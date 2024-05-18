@@ -13,7 +13,7 @@ const LoginForm = ({setToken, setUser}) => {
         }
       })
     
-      const [ signup, signUpresult ] = useMutation(SIGNUP, {
+      const [ signup, signUpResult ] = useMutation(SIGNUP, {
         onError: (error) => {
           console.log('error', error)
           console.log(error.graphQLErrors[0].message)
@@ -21,19 +21,28 @@ const LoginForm = ({setToken, setUser}) => {
       })
     
       useEffect(() => {
-        const token = localStorage.getItem('tasks-token')
+        const token = localStorage.getItem('user-token')
         if (token) {
           setToken(token)
-          console.log(result);
+          const id = localStorage.getItem('user-id')
+          const usernameLocal = localStorage.getItem('user-username');
+          const accountType = localStorage.getItem('user-accountType');
+          setUser({
+            username: usernameLocal,
+            id,
+            accountType
+          })
         }
       }, []) // Empty dependency array ensures this effect runs only once on mount
     
       useEffect(() => {
-        console.log(result.data);
         if ( result.data ) {
           const token = result.data.login.value
           setToken(token)
-          localStorage.setItem('tasks-token', token)
+          localStorage.setItem('user-token', token)
+          localStorage.setItem('user-id', result.data.login.id)
+          localStorage.setItem('user-username', result.data.login.username)
+          localStorage.setItem('user-accountType', result.data.login.accountType)
           setUser({
             username: result.data.login.username,
             id: result.data.login.id,
