@@ -8,6 +8,11 @@ import '../styles/editProfile.css'
 const EditProfile = ({user, profilePicture}) => {
     const [file, setFile] = useState(null);
     const [isEdit, setIsEdit] = useState(null)
+    const [name, setName] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [pronouns, setPronouns] = useState(null)
+    const [cohort, setCohort] = useState(null)
+
     const [uploadProfilePicture] = useMutation(UPLOAD_PROFILE_PICTURE, {
         onError: (error) => {
           console.log('error', error)
@@ -26,6 +31,10 @@ const EditProfile = ({user, profilePicture}) => {
       console.error('Failed to upload file:', error);
     }
   };
+
+  const handleSubmitEdit = () => {
+
+  }
 
   return (
     <div className=''>
@@ -47,22 +56,38 @@ const EditProfile = ({user, profilePicture}) => {
                     <form action="">
                         <li>
                             <div>
-                                <label>Name: {isEdit ? <input type="text" /> : user.name}</label>
+                                <label>
+                                    Name: {isEdit ? 
+                                    <input type="text" value={user.name} onChange={({ target }) => setName(target.value)} /> 
+                                    : user.name}
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <label>Email: {isEdit ? <input type="text" /> : user.email}</label>
+                                <label>
+                                    Email: {isEdit ? 
+                                    <input type="text" value={user.email} onChange={({ target }) => setEmail(target.value)} /> 
+                                    : user.email}
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <label>Cohort: {isEdit ? <input type="text" /> : user.cohort}</label>
+                                <label>
+                                    Cohort: {isEdit ? 
+                                    <input type="text" value={user.cohort} onChange={({ target }) => setCohort(target.value)} /> 
+                                    : user.cohort}
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <label>Pronouns: {isEdit ? <input type="text" /> : user.pronouns}</label>
+                                <label>
+                                    Pronouns: {isEdit ? 
+                                    <input type="text" value={user.pronouns} onChange={({ target }) => setPronouns(target.value)} /> 
+                                    : user.pronouns}
+                                </label>
                             </div>
                         </li>
                         <div className='right'>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
-import { LOGIN, SIGNUP } from '../queries'
+import { LOGIN, SIGNUP, GET_USER_DATA } from '../queries'
+import { useApolloClient, gql } from '@apollo/client';
 
 const LoginForm = ({setToken, setUser}) => {
     const [username, setUsername] = useState('')
@@ -19,24 +20,44 @@ const LoginForm = ({setToken, setUser}) => {
           console.log(error.graphQLErrors[0].message)
         }
       })
-    
+
+      const client = useApolloClient();
+      
+      const getUserInfo = async (id) => {
+        console.log('id', id);
+        try {
+          const { data } = await client.query({
+            query: GET_USER_DATA,
+            variables: {id}
+          });
+          console.log(data);
+          setUser({
+            username: data.getUser.username,
+            id,
+            accountType: data.getUser.accountType,
+            profilePicture: data.getUser.profilePicture,
+            name: data.getUser.name,
+            email: data.getUser.email,
+            pronouns: data.getUser.pronouns,
+            cohort: data.getUser.cohort,
+          })
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      //Reffresh
       useEffect(() => {
         const token = localStorage.getItem('user-token')
         if (token) {
           setToken(token)
           const id = localStorage.getItem('user-id')
-          const usernameLocal = localStorage.getItem('user-username');
-          const accountType = localStorage.getItem('user-accountType');
-          const picture = localStorage.getItem('user-picture');
-          setUser({
-            username: usernameLocal,
-            id,
-            accountType,
-            picture
-          })
+
+          getUserInfo(id)
         }
       }, []) // Empty dependency array ensures this effect runs only once on mount
     
+      //Login
       useEffect(() => {
         if ( result.data ) {
           const token = result.data.login.value
@@ -44,13 +65,16 @@ const LoginForm = ({setToken, setUser}) => {
           localStorage.setItem('user-token', token)
           localStorage.setItem('user-id', result.data.login.id)
           localStorage.setItem('user-username', result.data.login.username)
-          localStorage.setItem('user-accountType', result.data.login.accountType)
-          localStorage.setItem('user-picture', result.data.login.accountType)
+
           setUser({
             username: result.data.login.username,
             id: result.data.login.id,
             accountType: result.data.login.accountType,
-            picture: result.data.login.picture
+            profilePicture: result.data.login.profilePicture,
+            name: result.data.login.name,
+            email: result.data.login.email,
+            cohort: result.data.login.cohort,
+            pronouns: result.data.login.pronouns
           })
         }
       }, [result.data])

@@ -7,7 +7,7 @@ export const LOGIN = gql`
       username
       id
       accountType
-      picture
+      profilePicture
     }
   }
 `
@@ -21,11 +21,15 @@ export const SIGNUP = gql`
 `
 
 export const GET_USER_DATA = gql`
-  query GetUser($token: String!) {
-    user(token: $token) {
-      id
+  query getUser($id: String!) {
+    getUser(id: $id) {
       username
       accountType
+      name
+      email
+      cohort
+      pronouns
+      profilePicture
     }
   }
 `;

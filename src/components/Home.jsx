@@ -21,7 +21,7 @@ function Home ({user, logout}) {
   const [selectedView, setSelectedView] = useState('home')
   const [isHover, setIsHover] = useState(false)
   
-  const profilePicture = `http://localhost:4001/uploads/${user.picture}`
+  const profilePicture = `http://localhost:4001/uploads/${user.profilePicture}`
 
   const getSelectedView = (path) => {
     setSelectedView(path)
@@ -62,7 +62,7 @@ function Home ({user, logout}) {
             <div className='welcome'>Welcome {user.username}!</div>
             <div className='user' onMouseEnter={() => setIsHover(true)} 
                 onMouseLeave={() => setIsHover(false)} >
-              {user.picture ? 
+              {user.profilePicture ? 
                 <img src={profilePicture} />
                 : <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
               }
