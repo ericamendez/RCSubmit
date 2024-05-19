@@ -7,6 +7,7 @@ export const LOGIN = gql`
       username
       id
       accountType
+      picture
     }
   }
 `
@@ -30,7 +31,7 @@ export const GET_USER_DATA = gql`
 `;
 
 export const UPLOAD_PROFILE_PICTURE = gql`
-  mutation UploadProfilePicture($file: Upload!) {
-    uploadProfilePicture(file: $file)
+  mutation UploadProfilePicture($file: Upload!, $userID: String!) {
+    uploadProfilePicture(file: $file, userID: $userID)
   }
 `

@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
+
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('user-token')
@@ -13,7 +15,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   uri: 'http://localhost:4001/graphql',
 });
 // https://tasksgpt.onrender.com/graphql

@@ -57,10 +57,13 @@ function Home ({user, logout}) {
         <main className='main'>
           <header>
             <div className="logo"><img src={logo} alt="logo" /></div>
-            <div className='welcome'>Welcome Erica!</div>
+            <div className='welcome'>Welcome {user.username}!</div>
             <div className='user' onMouseEnter={() => setIsHover(true)} 
                 onMouseLeave={() => setIsHover(false)} >
-              <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
+              {user.picture ? 
+                <img src={`http://localhost:4001/uploads/${user.picture}`} />
+                : <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
+              }
               <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
                 <li>
                   <Link to="/profile">
@@ -78,7 +81,7 @@ function Home ({user, logout}) {
               <Route path="/submit" element={<SubmitView />} />
               <Route path="/submissionView" element={user.accountType === 'admin' || user.accountType === 'owner' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />
-              <Route path="/profile" element={<EditProfile />} />
+              <Route path="/profile" element={<EditProfile id={user.id} />} />
           </Routes>
 
         </main>

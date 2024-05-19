@@ -27,10 +27,12 @@ const LoginForm = ({setToken, setUser}) => {
           const id = localStorage.getItem('user-id')
           const usernameLocal = localStorage.getItem('user-username');
           const accountType = localStorage.getItem('user-accountType');
+          const picture = localStorage.getItem('user-picture');
           setUser({
             username: usernameLocal,
             id,
-            accountType
+            accountType,
+            picture
           })
         }
       }, []) // Empty dependency array ensures this effect runs only once on mount
@@ -43,10 +45,12 @@ const LoginForm = ({setToken, setUser}) => {
           localStorage.setItem('user-id', result.data.login.id)
           localStorage.setItem('user-username', result.data.login.username)
           localStorage.setItem('user-accountType', result.data.login.accountType)
+          localStorage.setItem('user-picture', result.data.login.accountType)
           setUser({
             username: result.data.login.username,
             id: result.data.login.id,
-            accountType: result.data.login.accountType
+            accountType: result.data.login.accountType,
+            picture: result.data.login.picture
           })
         }
       }, [result.data])

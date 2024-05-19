@@ -31,6 +31,7 @@
     color: white;
 }
 
+
 .nav div:hover{
     color: rgb(160, 30, 30);
     background-color: rgb(68, 68, 68);
@@ -58,13 +59,20 @@ header img{
 .logo{
     margin: 25px 0 0 30px;
     text-align: left;
-
 }
+
 
 .user {
     margin: 25px 40px 0 0;
     text-align: right;
     font-size: x-large;
+}
+
+.user img{
+    object-fit: cover;
+    height: 40px;
+    width:40px;
+    border-radius: 100%;
 }
 
 .welcome{
@@ -110,6 +118,10 @@ body::-webkit-scrollbar {
 .outer li:hover{
     border-radius: 10px;
     background-color: rgba(97, 94, 94, .3);
+}
+
+.user img:hover {
+    opacity: 0.5;
 
 }
 
@@ -121,7 +133,7 @@ body::-webkit-scrollbar {
 .inner {
     z-index: 10;
     margin: 30px;
-  }	
+  }
 
   .hidden{
     display: none;
