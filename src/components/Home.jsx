@@ -20,6 +20,8 @@ import EditProfile from './EditProfile'
 function Home ({user, logout}) {
   const [selectedView, setSelectedView] = useState('home')
   const [isHover, setIsHover] = useState(false)
+  
+  const profilePicture = `http://localhost:4001/uploads/${user.picture}`
 
   const getSelectedView = (path) => {
     setSelectedView(path)
@@ -61,7 +63,7 @@ function Home ({user, logout}) {
             <div className='user' onMouseEnter={() => setIsHover(true)} 
                 onMouseLeave={() => setIsHover(false)} >
               {user.picture ? 
-                <img src={`http://localhost:4001/uploads/${user.picture}`} />
+                <img src={profilePicture} />
                 : <FontAwesomeIcon className="userIcon" icon={faCircleUser} />
               }
               <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
@@ -81,7 +83,7 @@ function Home ({user, logout}) {
               <Route path="/submit" element={<SubmitView />} />
               <Route path="/submissionView" element={user.accountType === 'admin' || user.accountType === 'owner' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />
-              <Route path="/profile" element={<EditProfile id={user.id} />} />
+              <Route path="/profile" element={<EditProfile user={user} profilePicture={profilePicture} />} />
           </Routes>
 
         </main>
