@@ -2,16 +2,16 @@ import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { UPLOAD_PROFILE_PICTURE } from '../queries';
+import { UPLOAD_PROFILE_PICTURE, EDIT_USER_INFO, GET_USER_DATA } from '../queries';
 import '../styles/editProfile.css'
 
 const EditProfile = ({user, profilePicture}) => {
     const [file, setFile] = useState(null);
     const [isEdit, setIsEdit] = useState(null)
-    const [name, setName] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [pronouns, setPronouns] = useState(null)
-    const [cohort, setCohort] = useState(null)
+    const [name, setName] = useState(user.name)
+    const [email, setEmail] = useState(user.email)
+    const [pronouns, setPronouns] = useState(user.pronouns)
+    const [cohort, setCohort] = useState(user.cohort)
 
     const [uploadProfilePicture] = useMutation(UPLOAD_PROFILE_PICTURE, {
         onError: (error) => {
@@ -32,8 +32,18 @@ const EditProfile = ({user, profilePicture}) => {
     }
   };
 
-  const handleSubmitEdit = () => {
+  const [editInfo] = useMutation(EDIT_USER_INFO, {
+    onCompleted: () => {
+      console.log('User Updated')
+    },
+    refetchQueries: [{ query: GET_USER_DATA }],
+    onError: (error) => {
+      console.log(error)
+    }
+  });
 
+  const handleSubmitEdit = async () => {
+    await editInfo({variables: { userID:user.id, name, email, cohort, pronouns }})
   }
 
   return (
@@ -53,12 +63,12 @@ const EditProfile = ({user, profilePicture}) => {
                         <div className='right'>
                             <FontAwesomeIcon icon={faPenToSquare} onClick={() => setIsEdit(!isEdit) } />
                         </div>
-                    <form action="">
+                    <form onSubmit={handleSubmitEdit}>
                         <li>
                             <div>
                                 <label>
                                     Name: {isEdit ? 
-                                    <input type="text" value={user.name} onChange={({ target }) => setName(target.value)} /> 
+                                    <input type="text" value={name} onChange={({ target }) => setName(target.value)} /> 
                                     : user.name}
                                 </label>
                             </div>
@@ -67,7 +77,7 @@ const EditProfile = ({user, profilePicture}) => {
                             <div>
                                 <label>
                                     Email: {isEdit ? 
-                                    <input type="text" value={user.email} onChange={({ target }) => setEmail(target.value)} /> 
+                                    <input type="text" value={email} onChange={({ target }) => setEmail(target.value)} /> 
                                     : user.email}
                                 </label>
                             </div>
@@ -76,7 +86,7 @@ const EditProfile = ({user, profilePicture}) => {
                             <div>
                                 <label>
                                     Cohort: {isEdit ? 
-                                    <input type="text" value={user.cohort} onChange={({ target }) => setCohort(target.value)} /> 
+                                    <input type="text" value={cohort} onChange={({ target }) => setCohort(target.value)} /> 
                                     : user.cohort}
                                 </label>
                             </div>
@@ -85,7 +95,7 @@ const EditProfile = ({user, profilePicture}) => {
                             <div>
                                 <label>
                                     Pronouns: {isEdit ? 
-                                    <input type="text" value={user.pronouns} onChange={({ target }) => setPronouns(target.value)} /> 
+                                    <input type="text" value={pronouns} onChange={({ target }) => setPronouns(target.value)} /> 
                                     : user.pronouns}
                                 </label>
                             </div>
