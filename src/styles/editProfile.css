@@ -37,6 +37,10 @@ h1 {
     text-align: right;
 }
 
+.editInfo .right:hover {
+    color: rgb(206,0,11)
+}
+
 .picture{
     text-align: center;
 }

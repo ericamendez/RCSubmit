@@ -24,13 +24,11 @@ const LoginForm = ({setToken, setUser}) => {
       const client = useApolloClient();
       
       const getUserInfo = async (id) => {
-        console.log('id', id);
         try {
           const { data } = await client.query({
             query: GET_USER_DATA,
             variables: {id}
           });
-          console.log(data);
           setUser({
             username: data.getUser.username,
             id,

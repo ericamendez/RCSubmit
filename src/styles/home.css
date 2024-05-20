@@ -190,7 +190,7 @@ body::-webkit-scrollbar {
 .weeks li{
     margin: 10px;
 }
-.weeks a {
+.adminTop a {
     color:rgb(132, 173, 243);
     text-decoration: none;
     padding: 10px;
@@ -200,12 +200,35 @@ body::-webkit-scrollbar {
     list-style: none;
 }
 
+.editDueThisWeek .assignmentContainer li{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.assignmentContainer{
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.editDueThisWeek li div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .editDueThisWeek input{
-    float: left;
+    /* float: left; */
     margin-right: 10px;
 }
 
 button, .buttonStyle {
     border-radius: 5px;
     padding: 5px 10px;
+}
+
+.editAssignmentIcons{
+    text-align: right;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
 }

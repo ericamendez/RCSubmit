@@ -59,7 +59,7 @@ function Home ({user, logout}) {
         <main className='main'>
           <header>
             <div className="logo"><img src={logo} alt="logo" /></div>
-            <div className='welcome'>Welcome {user.username}!</div>
+            <div className='welcome'>Welcome {user.name ? user.name: user.username}!</div>
             <div className='user' onMouseEnter={() => setIsHover(true)} 
                 onMouseLeave={() => setIsHover(false)} >
               {user.profilePicture ? 
@@ -69,7 +69,7 @@ function Home ({user, logout}) {
               <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
                 <li>
                   <Link to="/profile">
-                    <a onClick={() => getSelectedView('editProfile')} href="#">Edit Profile</a>
+                    <span onClick={() => getSelectedView('editProfile')}>Edit Profile</span>
                   </Link>
                 </li>
                 <li><a onClick={logout}>Logout</a></li>

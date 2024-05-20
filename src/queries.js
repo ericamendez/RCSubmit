@@ -25,10 +25,39 @@ export const EDIT_USER_INFO = gql`
   }
 `
 
+export const ADD_ASSIGNMENT = gql`
+  mutation Mutation($description: String!, $show: Boolean!, $week: Int!, $link: String) {
+    addAssignment(description: $description, show: $show, week: $week, link: $link) {
+      description
+    }
+  }
+`
+
 export const UPLOAD_PROFILE_PICTURE = gql`
 mutation UploadProfilePicture($file: Upload!, $userID: String!) {
   uploadProfilePicture(file: $file, userID: $userID)
 }
+`
+
+export const ALL_WEEKS = gql`
+    query {
+      getAllWeeks {
+            week
+            assignments
+            current
+            dueDate
+        }
+    }
+`
+export const GET_WEEKS_ASSIGNMENTS = gql`
+    query getWeeksAssignments($week: Int!) {
+      getWeeksAssignments(week: $week) {
+                id
+                description
+                link
+                show
+        }
+    }
 `
 
 export const LOGIN = gql`

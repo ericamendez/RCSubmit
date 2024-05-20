@@ -8,10 +8,10 @@ import '../styles/editProfile.css'
 const EditProfile = ({user, profilePicture}) => {
     const [file, setFile] = useState(null);
     const [isEdit, setIsEdit] = useState(null)
-    const [name, setName] = useState(user.name)
-    const [email, setEmail] = useState(user.email)
-    const [pronouns, setPronouns] = useState(user.pronouns)
-    const [cohort, setCohort] = useState(user.cohort)
+    const [name, setName] = useState(user.name ? user.name : '')
+    const [email, setEmail] = useState(user.email ? user.email : '')
+    const [pronouns, setPronouns] = useState(user.pronouns ? user.pronouns : '')
+    const [cohort, setCohort] = useState(user.cohort ? user.cohort : '')
 
     const [uploadProfilePicture] = useMutation(UPLOAD_PROFILE_PICTURE, {
         onError: (error) => {
