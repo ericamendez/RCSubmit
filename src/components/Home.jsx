@@ -69,7 +69,7 @@ function Home ({user, logout}) {
               <ul onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} className={isHover ? 'profile outer':'profile outer hidden'}>
                 <li>
                   <Link to="/profile">
-                    <a href="#">Edit Profile</a>
+                    <a onClick={() => getSelectedView('editProfile')} href="#">Edit Profile</a>
                   </Link>
                 </li>
                 <li><a onClick={logout}>Logout</a></li>
