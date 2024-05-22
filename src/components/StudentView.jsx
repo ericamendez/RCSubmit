@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import '../styles/studentHome.scss'
 
 const StudentView = ({ students }) => {
@@ -44,6 +44,9 @@ const StudentView = ({ students }) => {
     const progressFillRef = useRef(null);
     const percentsRef = useRef(null);
 
+    const [hackerNews, setHackerNews] = useState([])
+    const [hackerNewsDoneLoading, setHackerNewsDoneLoading] = useState(false)
+
     useEffect(() => {
         // Example call to progress function after component has mounted
         progress(getNumberOfAssignmentsDone());
@@ -56,7 +59,6 @@ const StudentView = ({ students }) => {
         const percentsSpan = percentsRef.current;
         let deg = 360*percent/100;
     
-        console.log(ppc);
         if (percent > 50) {
           ppc.classList.add('gt-50');
         }
@@ -80,6 +82,29 @@ const StudentView = ({ students }) => {
         array[index].isDone = !array[index].isDone;
         progress(getNumberOfAssignmentsDone());
     }
+
+    // MOVE TO BACKEND EVENTUALLY FOR LESS CALLS TO API
+    const getHackerNews = async () => {
+        const result =  await fetch('https://hacker-news.firebaseio.com/v0/topstories.json') 
+        const data = await result.json()
+        const top = data.slice(0, 10)
+
+        let full = []
+        top.forEach(async (news) => {
+            // https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
+            const newsResult =  await fetch(`https://hacker-news.firebaseio.com/v0/item/${news}.json?print=pretty`)
+            const individual = await newsResult.json()
+            console.log(individual)
+            full.push(individual)
+        })
+
+        console.log(full);
+
+        await setHackerNews(full)
+        await setHackerNewsDoneLoading(true)
+    } 
+
+    if(!hackerNewsDoneLoading){getHackerNews()}
     
     return (
         <div className="mainContainer">
@@ -110,8 +135,22 @@ const StudentView = ({ students }) => {
                     </div>
                     </div>
                 </section>
-                <section>
-
+            </section>
+            <section className="extra">
+                <section></section>
+                <section className="hackerContainer">
+                        <h3>Hackernews Updates</h3>
+                        {hackerNewsDoneLoading ?
+                            <ul>
+                                {hackerNews.map((news, index) => {
+                                    return (
+                                        <li key={index}>
+                                            <a href={news.url} target="_blank">{news.title}</a>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        : <p>Loading...</p>}
                 </section>
             </section>
         </div>

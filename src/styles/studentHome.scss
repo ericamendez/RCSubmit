@@ -10,6 +10,14 @@
     padding: 5px;
 }
 
+.hackerContainer a{
+    text-decoration: none;
+    color: rgb(132, 173, 243);
+}
+ .hackerContainer{
+    text-align: left;
+ }
+
 @mixin circle($size) {
     content: "";
     position: absolute;
