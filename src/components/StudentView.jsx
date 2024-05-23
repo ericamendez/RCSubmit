@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import '../styles/studentHome.scss'
 import HackerNews from './HackerNews'
+import DailyChallenge from './DailyChallenge'
 
 const StudentView = ({ students }) => {
     const array = [
@@ -113,7 +114,7 @@ const StudentView = ({ students }) => {
                 </section>
             </section>
             <section className="extra">
-                <section></section>
+                <DailyChallenge />
                 <HackerNews />
             </section>
         </div>

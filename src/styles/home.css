@@ -155,7 +155,7 @@ body::-webkit-scrollbar {
     padding-bottom: 2em;
 }
 
-.dueThisWeek section, .adminTop section, .extra > section{
+.dueThisWeek section, .adminTop section, .extra > section, .cohort > section{
     background-color: rgba(50, 50, 50, 0.8);
     border-radius: 30px;
     padding: 10px 40px;
@@ -165,7 +165,12 @@ body::-webkit-scrollbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2em;
+}
 
+.cohort{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2em;
 }
 
 .resourceTop {
@@ -174,8 +179,17 @@ body::-webkit-scrollbar {
     grid-gap: 2em;
 }
 
+.resourceTop h1{
+    margin-top: 0;
+}
+
+.resourceTop li{
+    padding-bottom: 20px;
+}
+
 .reminders{
     text-align: left;
+    font-size: x-large;
 }
 
 .resourceTop iframe{
@@ -189,6 +203,7 @@ body::-webkit-scrollbar {
     grid-template-columns: 3fr 1fr;
     grid-gap: 2em;
     text-align: left;
+    padding-bottom: 2em;
 }
 
 .weeks ul{

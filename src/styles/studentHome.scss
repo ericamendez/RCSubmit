@@ -2,33 +2,37 @@
 // }
 
 .dueThisWeek ul{
-    padding-left: 10px;
-    list-style: none;
+  padding-left: 10px;
+  list-style: none;
 }
 
 .dueThisWeek ul li{
-    padding: 5px;
+  padding: 5px;
 }
 
 .hackerContainer a{
-    text-decoration: none;
-    color: rgb(132, 173, 243);
+  text-decoration: none;
+  color: rgb(132, 173, 243);
 }
 
 .hackerContainer{
-    text-align: left;
+  text-align: left;
 }
 
 .hackerContainer ul{
-   list-style: none;
-   padding: 0;
-   border-top: rgba(88, 87, 87, 0.5) solid 1px;
+  list-style: none;
+  padding: 0;
+  border-top: rgba(88, 87, 87, 0.5) solid 1px;
 }
 
 .hackerContainer li{
-     padding: 5px;
-     border-bottom: rgba(88, 87, 87, 0.5) solid 1px;
-  }
+  padding: 5px;
+  border-bottom: rgba(88, 87, 87, 0.5) solid 1px;
+}
+
+.hackerContainer a:hover{
+  color: #a29bfe;
+}
   
 @mixin circle($size) {
     content: "";

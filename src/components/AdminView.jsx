@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { useQuery, useMutation } from "@apollo/client"
-import { ALL_WEEKS, ADD_ASSIGNMENT, GET_WEEKS_ASSIGNMENTS } from "../queries"
+import { ALL_WEEKS, ADD_ASSIGNMENT, GET_WEEKS_ASSIGNMENTS, DELETE_ASSIGNMENT } from "../queries"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import '../styles/admin.css'
 
 const weeksCollection = [
     {
@@ -49,6 +50,14 @@ const weeksCollection = [
 
 const AdminView = () => {
     const [currentWeek, setCurrentWeek] = useState(1)
+    const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null)
+    const [isAdd, setIsAdd] = useState(false)
+    const [description, setDescription] = useState('')
+    const [link, setLink] = useState('')
+    const [assignmentType, setAssignmentType] = useState('read')
+    const [isEdit, setIsEdit] = useState('')
+
+    const assignmentTypes = ['read', 'fill out', 'watch', 'submitLink', 'submitZip', 'submitScreenshot']
 
     const resultWeeks = useQuery(ALL_WEEKS, {
         onCompleted: (data) => {
@@ -60,19 +69,12 @@ const AdminView = () => {
         },
       })
 
-      const { loading, error, getWeeksAssignmentsData } = useQuery(GET_WEEKS_ASSIGNMENTS, {
+    const { loading, error, getWeeksAssignmentsData } = useQuery(GET_WEEKS_ASSIGNMENTS, {
         variables: { week: currentWeek },
         onCompleted: (data) => {
             setCurrentWeekAssignments(data.getWeeksAssignments)
         },
     });
-    
-    const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null)
-    const [isAdd, setIsAdd] = useState(false)
-    const [description, setDescription] = useState('')
-    const [link, setLink] = useState('')
-    const [isEdit, setIsEdit] = useState('')
-
 
     const [addAssignment] = useMutation(ADD_ASSIGNMENT, {
         onCompleted: () => {
@@ -84,6 +86,9 @@ const AdminView = () => {
         },
       });
 
+    const [deleteAssignment] = useMutation(DELETE_ASSIGNMENT);
+
+
     const getWeek = async (num) => {
         setCurrentWeek(Number(num));
         // const newWeek = await getWeeksAssignmentsData
@@ -94,7 +99,7 @@ const AdminView = () => {
 
     const handleSubmitAssignment = async (e) => {
         e.preventDefault()
-        await addAssignment({ variables: { description, link, week: currentWeek, show: false } })
+        await addAssignment({ variables: { description, link, week: currentWeek, show: false, assignmentType } })
                 
         setIsAdd(false)
         setDescription('')
@@ -112,11 +117,13 @@ const AdminView = () => {
                             <li key={assignment.id}>
                                 <div>
                                     <input type="checkbox"/>
-                                    <p>{assignment.description} <a href={assignment.link}>Link</a></p>
+                                    <p>{assignment.description} 
+                                        {assignment.link ? <a href={assignment.link}>Link</a> : ''}
+                                    </p>
                                 </div>
                                 <div className="editAssignmentIcons">
                                     <FontAwesomeIcon icon={faPenToSquare} onClick={() => setIsEdit(!isEdit) } />
-                                    <FontAwesomeIcon icon={faTrash} onClick={() => '' } />
+                                    <FontAwesomeIcon icon={faTrash} onClick={ () => {deleteAssignment({ variables: { id: assignment.id } })} } />
                                 </div>
                             </li>
                         )): null }
@@ -135,6 +142,12 @@ const AdminView = () => {
                                     <input type="text" onChange={({ target }) => setLink(target.value)}  />
                                 </li>
                                 <li>
+                                    Assignment Type:
+                                    <select onChange={({ target }) => setAssignmentType(target.value)}>
+                                        { assignmentTypes.map((type, i) => <option key={i} value={type} >{type}</option>)}
+                                    </select>
+                                </li>
+                                <li>
                                     <button>Submit</button>
                                 </li>
                             </ul>
@@ -143,6 +156,7 @@ const AdminView = () => {
                     }
                 </section>
                 <section className="weeks">
+                    <h3>Weeks</h3>
                     <ul>
                         { resultWeeks.data ?  
                             resultWeeks.data.getAllWeeks.map((week) => (
@@ -152,6 +166,23 @@ const AdminView = () => {
                             )) : null
                         }
                     </ul>
+                </section>
+            </section>
+            <section className="cohort">
+                <section>
+                    <h3>Cohort Settings</h3>
+                    <section className="cohortDivide">
+                        <section>
+                            <h5>Current Cohort</h5>
+                        </section>
+                        <section>
+                            <h5>Previous Cohorts</h5>
+
+                        </section>
+                        <section>
+                            add
+                        </section>
+                    </section>
                 </section>
             </section>
             <section>

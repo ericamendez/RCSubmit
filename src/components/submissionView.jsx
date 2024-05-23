@@ -5,7 +5,7 @@ function SubmissionView() {
 
     return (
       <div className="subViewContainer">
-        <h2>2024B</h2>
+        <h2>Submissions 2024B</h2>
         <SubmissionTable />
       </div>
     )

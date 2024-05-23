@@ -26,10 +26,16 @@ export const EDIT_USER_INFO = gql`
 `
 
 export const ADD_ASSIGNMENT = gql`
-  mutation Mutation($description: String!, $show: Boolean!, $week: Int!, $link: String) {
-    addAssignment(description: $description, show: $show, week: $week, link: $link) {
+  mutation Mutation($description: String!, $show: Boolean!, $week: Int!, $link: String, $assignmentType: String) {
+    addAssignment(description: $description, show: $show, week: $week, link: $link, assignmentType: $assignmentType) {
       description
     }
+  }
+`
+
+export const DELETE_ASSIGNMENT = gql`
+  mutation DeleteAssignment($id: ID!) {
+    deleteAssignment(id: $id)
   }
 `
 

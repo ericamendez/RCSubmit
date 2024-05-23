@@ -47,7 +47,7 @@ const HackerNews = () => {
                 {data.map((news, index) => {
                     return (
                         <li key={index}>
-                                    <a href={news.url} target="_blank">{news.title}.hi</a>
+                                    <a href={news.url} target="_blank">{news.title}</a>
                         </li>
                     )
                 })}

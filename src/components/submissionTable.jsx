@@ -19,7 +19,7 @@ const students= [
   },
   {
     id: 4,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -39,12 +39,12 @@ const students= [
   },
   {
     id: 8,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 9,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -64,12 +64,12 @@ const students= [
   },
   {
     id: 13,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 14,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -89,12 +89,12 @@ const students= [
   },
   {
     id: 18,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 19,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -114,12 +114,12 @@ const students= [
   },
   {
     id: 23,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 24,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -139,12 +139,12 @@ const students= [
   },
   {
     id: 28,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 29,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
@@ -164,12 +164,12 @@ const students= [
   },
   {
     id: 33,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
   {
     id: 34,
-    student: "Muji Satoshi",
+    student: "Hayao Miyazaki",
     assignmentsSubmitted: [2],
   },
 ]
