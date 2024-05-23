@@ -9,9 +9,9 @@ import {
   faCommentDots,
   faHeart} from "@fortawesome/free-solid-svg-icons"
 import '../styles/home.css'
-import AdminView from './AdminView'
-import StudentView from './StudentView'
-import SubmissionView from './SubmissionView'
+import AdminView from './admin/AdminView'
+import StudentView from './student/StudentView'
+import SubmissionView from './admin/SubmissionView'
 import ResourcesView from './ResourcesView'
 import logo from '../assets/logo.png'
 import SubmitView from './SubmitView'

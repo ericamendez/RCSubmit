@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import '../styles/studentHome.scss'
+import '../../styles/studentHome.scss'
 import HackerNews from './HackerNews'
 import DailyChallenge from './DailyChallenge'
 
