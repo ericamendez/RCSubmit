@@ -14,7 +14,7 @@ const DueThisWeek = ({currentWeek}) => {
 
     const assignmentTypes = ['read', 'fill out', 'watch', 'submitLink', 'submitZip', 'submitScreenshot']
     
-    useQuery(GET_WEEKS_ASSIGNMENTS, {
+    const { refetch } = useQuery(GET_WEEKS_ASSIGNMENTS, {
         variables: { week: currentWeek },
         onCompleted: (data) => {
             setCurrentWeekAssignments(data.getWeeksAssignments)
@@ -22,8 +22,18 @@ const DueThisWeek = ({currentWeek}) => {
     });
 
     const [addAssignment] = useMutation(ADD_ASSIGNMENT, {
-        onCompleted: () => {
+        onCompleted: (response) => {
           console.log('Assignment added')
+          console.log(response)
+          let newAssignment = {
+            id: response.addAssignment.id,
+            description: response.addAssignment.description,
+            week: response.addAssignment.week,
+            link: response.addAssignment.link,
+            show: response.addAssignment.show,
+            assignmentType: response.addAssignment.assignmentType
+          }
+          setCurrentWeekAssignments([...currentWeekAssignments, newAssignment])
         },
         refetchQueries: [{ query: ALL_WEEKS }],
         onError: (error) => {
@@ -40,7 +50,17 @@ const DueThisWeek = ({currentWeek}) => {
         setLink('')
     }
 
-    const [deleteAssignment] = useMutation(DELETE_ASSIGNMENT);
+    const [deleteAssignment] = useMutation(DELETE_ASSIGNMENT, {
+        onCompleted: (response) => {
+            const deletedAssignmentId = response.deleteAssignment;
+            console.log(response);
+            console.log("Deleted assignment with id:", deletedAssignmentId);
+            setCurrentWeekAssignments(currentWeekAssignments.filter((a) => a.id !== deletedAssignmentId));
+        },
+        onError: (error) => {
+          console.error("Error deleting assignment:", error);
+        },
+      });
 
     return (
         <section className="editDueThisWeek">

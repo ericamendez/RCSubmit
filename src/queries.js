@@ -28,7 +28,12 @@ export const EDIT_USER_INFO = gql`
 export const ADD_ASSIGNMENT = gql`
   mutation Mutation($description: String!, $show: Boolean!, $week: Int!, $link: String, $assignmentType: String) {
     addAssignment(description: $description, show: $show, week: $week, link: $link, assignmentType: $assignmentType) {
+      id
       description
+      link
+      week
+      show
+      assignmentType
     }
   }
 `
@@ -62,6 +67,28 @@ export const GET_WEEKS_ASSIGNMENTS = gql`
                 description
                 link
                 show
+        }
+    }
+`
+
+export const ADD_COHORT = gql`
+  mutation addCohort($name: String!, $startDate: String!, $endDate: String!) {
+    addCohort(name: $name, startDate: $startDate, endDate: $endDate) {
+      name
+    }
+  }
+
+`
+
+export const ALL_COHORTS = gql`
+    query {
+      getAllCohorts {
+            name
+            startDate
+            endDate
+            isCurrentCohort
+            currentWeek
+            students
         }
     }
 `
