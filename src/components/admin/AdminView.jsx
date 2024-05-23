@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useQuery } from "@apollo/client"
-import { ALL_WEEKS } from "../../queries"
+import { ALL_WEEKS, ALL_COHORTS } from "../../queries"
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 // import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import EditDueThisWeek from "./EditDueThisWeek";
@@ -9,6 +9,19 @@ import CohortSettings from "./CohortSettings";
 
 const AdminView = () => {
     const [currentWeek, setCurrentWeek] = useState(1)
+    const [currentCohort, setCurrentCohort] = useState(null)
+    const [cohorts, setCohorts] = useState(null)
+
+    useQuery(ALL_COHORTS, {
+        onCompleted: (data) => {
+            setCohorts(data.getAllCohorts)
+            setCurrentCohort(data.getAllCohorts.find(cohort => cohort.isCurrentCohort === true))
+            setCurrentWeek(currentCohort.currentWeek)
+        },
+        onError: (error) => {
+          console.log(error)
+        },
+    })
     
     const resultWeeks = useQuery(ALL_WEEKS, {
         onError: (error) => {
@@ -36,13 +49,14 @@ const AdminView = () => {
                             resultWeeks.data.getAllWeeks.map((week) => (
                                 <li key={week.week}>
                                     <a href="#" onClick={()=> getWeek(week.week)}>Week {week.week}</a>
+                                    { currentWeek && currentWeek == week.week ? <span>(current week)</span> : null}
                                 </li>
                             )) : null
                         }
                     </ul>
                 </section>
             </section>
-            <CohortSettings />
+            <CohortSettings currentCohort={currentCohort} />
             <section>
                 <section >
                     <p>(each student will be associated to work the submit each week.)</p>

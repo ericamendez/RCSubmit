@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useMutation } from "@apollo/client"
-import { ADD_COHORT } from '../../queries'
+import { useMutation, useQuery } from "@apollo/client"
+import { ADD_COHORT, ALL_COHORTS } from '../../queries'
 
-const CohortSettings = () => {
+const CohortSettings = ({currentCohort}) => {
     const [isAddNewCohort, setIsAddNewCohort] = useState(false)
     const [name, setName] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -33,12 +33,17 @@ const CohortSettings = () => {
                 <h3>Cohort Settings</h3>
                 <section className="cohortDivide">
                     <section>
-                        <h5>Current Cohort</h5>
-
+                        <h4>Current Cohort</h4>
+                        <section>
+                            <p>Cohort: {currentCohort.name}</p>
+                            <p>Current Week: {currentCohort.currentWeek}</p>
+                            <p>Start Date: {currentCohort.startDate}</p>
+                            <p>End Date: {currentCohort.endDate}</p>
+                        </section>
 
                     </section>
                     <section>
-                        <h5>Previous Cohorts</h5>
+                        <h4>Previous Cohorts</h4>
 
                     </section>
                 </section>

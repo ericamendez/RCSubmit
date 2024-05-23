@@ -14,7 +14,7 @@ const DueThisWeek = ({currentWeek}) => {
 
     const assignmentTypes = ['read', 'fill out', 'watch', 'submitLink', 'submitZip', 'submitScreenshot']
     
-    const { refetch } = useQuery(GET_WEEKS_ASSIGNMENTS, {
+    useQuery(GET_WEEKS_ASSIGNMENTS, {
         variables: { week: currentWeek },
         onCompleted: (data) => {
             setCurrentWeekAssignments(data.getWeeksAssignments)

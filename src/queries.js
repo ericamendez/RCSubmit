@@ -88,7 +88,9 @@ export const ALL_COHORTS = gql`
             endDate
             isCurrentCohort
             currentWeek
-            students
+            students {
+                id
+            }
         }
     }
 `
