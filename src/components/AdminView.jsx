@@ -86,8 +86,10 @@ const AdminView = () => {
 
     const getWeek = async (num) => {
         setCurrentWeek(Number(num));
-        const newWeek = await getWeeksAssignmentsData({ variables: { week: Number(num) } })
-        setCurrentWeekAssignments(newWeek.data.getWeeksAssignments);
+        // const newWeek = await getWeeksAssignmentsData
+
+        console.log();
+        // setCurrentWeekAssignments(getWeeksAssignmentsData.getWeeksAssignments);
     }
 
     const handleSubmitAssignment = async (e) => {
