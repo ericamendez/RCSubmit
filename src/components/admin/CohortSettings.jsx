@@ -34,13 +34,15 @@ const CohortSettings = ({currentCohort}) => {
                 <section className="cohortDivide">
                     <section>
                         <h4>Current Cohort</h4>
-                        <section>
-                            <p>Cohort: {currentCohort.name}</p>
-                            <p>Current Week: {currentCohort.currentWeek}</p>
-                            <p>Start Date: {currentCohort.startDate}</p>
-                            <p>End Date: {currentCohort.endDate}</p>
-                        </section>
-
+                        {currentCohort ?
+                            <section>
+                                <p>Cohort: {currentCohort.name}</p>
+                                <p>Current Week: {currentCohort.currentWeek}</p>
+                                <p>Start Date: {currentCohort.startDate}</p>
+                                <p>End Date: {currentCohort.endDate}</p>
+                            </section>
+                            : null
+                        }
                     </section>
                     <section>
                         <h4>Previous Cohorts</h4>
