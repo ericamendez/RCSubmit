@@ -1,16 +1,16 @@
 import { useState } from "react"
 import { useQuery, useMutation } from "@apollo/client"
-import { ALL_WEEKS, ADD_ASSIGNMENT, GET_WEEKS_ASSIGNMENTS, DELETE_ASSIGNMENT } from "../../queries"
+import { ALL_WEEKS, ADD_ASSIGNMENT, GET_WEEKS_ASSIGNMENTS, DELETE_ASSIGNMENT, EDIT_ASSIGNMENT } from "../../queries"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 const DueThisWeek = ({currentWeek}) => {
     const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null)
     const [isAdd, setIsAdd] = useState(false)
+    const [isEdit, setIsEdit] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
     const [assignmentType, setAssignmentType] = useState('read')
-    const [isEdit, setIsEdit] = useState('')
 
     const assignmentTypes = ['read', 'fill out', 'watch', 'submitLink', 'submitZip', 'submitScreenshot']
     
@@ -24,7 +24,6 @@ const DueThisWeek = ({currentWeek}) => {
     const [addAssignment] = useMutation(ADD_ASSIGNMENT, {
         onCompleted: (response) => {
           console.log('Assignment added')
-          console.log(response)
           let newAssignment = {
             id: response.addAssignment.id,
             description: response.addAssignment.description,
@@ -39,7 +38,32 @@ const DueThisWeek = ({currentWeek}) => {
         onError: (error) => {
           console.log(error)
         },
-      });
+    });
+    const [editAssignment] = useMutation(EDIT_ASSIGNMENT, {
+        onCompleted: (response) => {
+            console.log('Assignment edited')
+            console.log('this is the response',response.editAssignment.id);
+            let editedObj = currentWeekAssignments.map( assignment => {
+                if(assignment.id === response.editAssignment.id) {
+                    return {
+                        id: response.editAssignment.id,
+                        description: response.editAssignment.description,
+                        week: response.editAssignment.week,
+                        link: response.editAssignment.link,
+                        show: response.editAssignment.show,
+                        assignmentType: response.editAssignment.assignmentType
+                    }
+                }
+                return assignment
+            })
+
+            console.log(editedObj);
+            setCurrentWeekAssignments(editedObj)
+        },
+        onError: (error) => {
+          console.log(error)
+        },
+    });
 
     const handleSubmitAssignment = async (e) => {
         e.preventDefault()
@@ -48,6 +72,12 @@ const DueThisWeek = ({currentWeek}) => {
         setIsAdd(false)
         setDescription('')
         setLink('')
+    }
+
+    const handleShowAssignment = async (e, id, currentShow) => {
+        e.preventDefault()
+        console.log('**************',currentShow)
+        await editAssignment({ variables: { id, show: !currentShow, link: null, week: null, description: null, assignmentType:null } })
     }
 
     const [deleteAssignment] = useMutation(DELETE_ASSIGNMENT, {
@@ -69,14 +99,14 @@ const DueThisWeek = ({currentWeek}) => {
                         { currentWeekAssignments ? currentWeekAssignments.map((assignment) => (
                             <li key={assignment.id}>
                                 <div>
-                                    <input type="checkbox"/>
+                                    <FontAwesomeIcon icon={faCircleCheck} className={assignment && assignment.show ? 'chaeck green' : 'check'} onClick={(e) => handleShowAssignment(e, assignment.id, assignment.show) } />
                                     <p>{assignment.description} 
                                         {assignment.link ? <a href={assignment.link}>Link</a> : ''}
                                     </p>
                                 </div>
                                 <div className="editAssignmentIcons">
                                     <FontAwesomeIcon icon={faPenToSquare} onClick={() => setIsEdit(!isEdit) } />
-                                    <FontAwesomeIcon icon={faTrash} onClick={ () => {deleteAssignment({ variables: { id: assignment.id } })} } />
+                                    <FontAwesomeIcon icon={faTrash} className="trash" onClick={ () => {deleteAssignment({ variables: { id: assignment.id } })} } />
                                 </div>
                             </li>
                         )): null }

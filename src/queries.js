@@ -140,3 +140,16 @@ export const CURRENT_ASSIGNMENTS_SHOWN = gql`
     }
   }
 `
+
+export const EDIT_ASSIGNMENT = gql`
+  mutation editAssignment($id: ID!, $description: String, $link: String, $show: Boolean, $assignmentType: String) {
+    editAssignment(id: $id, description: $description, link: $link, show: $show, assignmentType: $assignmentType) {
+      id
+      description
+      link
+      week
+      show
+      assignmentType
+    }
+  }
+`
