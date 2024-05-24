@@ -13,10 +13,11 @@ const AdminView = () => {
     const [cohorts, setCohorts] = useState(null)
 
     useQuery(ALL_COHORTS, {
-        onCompleted: (data) => {
-            setCohorts(data.getAllCohorts)
-            setCurrentCohort(data.getAllCohorts.find(cohort => cohort.isCurrentCohort === true))
-            setCurrentWeek(currentCohort.currentWeek)
+        onCompleted: async (data) => {
+            await setCohorts(data.getAllCohorts)
+            let resultCohort = await data.getAllCohorts.find(cohort => cohort.isCurrentCohort === true)
+            setCurrentCohort(await resultCohort)
+            setCurrentWeek(resultCohort.currentWeek)
         },
         onError: (error) => {
           console.log(error)
@@ -49,7 +50,7 @@ const AdminView = () => {
                             resultWeeks.data.getAllWeeks.map((week) => (
                                 <li key={week.week}>
                                     <a href="#" onClick={()=> getWeek(week.week)}>Week {week.week}</a>
-                                    { currentWeek && currentWeek == week.week ? <span>(current week)</span> : null}
+                                    { currentCohort && currentCohort.currentWeek && currentCohort.currentWeek == week.week ? <span>(current week)</span> : null}
                                 </li>
                             )) : null
                         }

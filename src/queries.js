@@ -95,6 +95,21 @@ export const ALL_COHORTS = gql`
     }
 `
 
+export const CURRENT_COHORT = gql`
+  query {
+    getAllCohorts {
+          name
+          startDate
+          endDate
+          isCurrentCohort
+          currentWeek
+          students {
+              id
+          }
+      }
+  }
+`
+
 export const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)  {
@@ -111,6 +126,17 @@ export const SIGNUP = gql`
   mutation createUser($username: String!, $password: String!, $accountType: String!) {
     createUser(username: $username, password: $password, accountType: $accountType) {
       username
+    }
+  }
+`
+
+export const CURRENT_ASSIGNMENTS_SHOWN = gql`
+  query {
+    getCurrentAssignmentsShown{
+      id
+      description
+      link
+      show
     }
   }
 `
