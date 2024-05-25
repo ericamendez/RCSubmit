@@ -12,6 +12,7 @@ query getUser($id: String!) {
     profilePicture
     submissions {
       week
+      assignments
     }
   }
 }
