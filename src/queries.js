@@ -10,6 +10,9 @@ query getUser($id: String!) {
     cohort
     pronouns
     profilePicture
+    submissions {
+      week
+    }
   }
 }
 `;
@@ -22,6 +25,12 @@ export const EDIT_USER_INFO = gql`
       cohort
       pronouns
     }
+  }
+`
+
+export const UPLOAD_PROFILE_PICTURE = gql`
+  mutation UploadProfilePicture($file: Upload!, $userID: String!) {
+    uploadProfilePicture(file: $file, userID: $userID)
   }
 `
 
@@ -38,16 +47,23 @@ export const ADD_ASSIGNMENT = gql`
   }
 `
 
+export const EDIT_ASSIGNMENT = gql`
+  mutation editAssignment($id: ID!, $description: String, $link: String, $show: Boolean, $assignmentType: String) {
+    editAssignment(id: $id, description: $description, link: $link, show: $show, assignmentType: $assignmentType) {
+      id
+      description
+      link
+      week
+      show
+      assignmentType
+    }
+  }
+`
+
 export const DELETE_ASSIGNMENT = gql`
   mutation DeleteAssignment($id: ID!) {
     deleteAssignment(id: $id)
   }
-`
-
-export const UPLOAD_PROFILE_PICTURE = gql`
-mutation UploadProfilePicture($file: Upload!, $userID: String!) {
-  uploadProfilePicture(file: $file, userID: $userID)
-}
 `
 
 export const ALL_WEEKS = gql`
@@ -130,20 +146,9 @@ export const SIGNUP = gql`
   }
 `
 
-export const CURRENT_ASSIGNMENTS_SHOWN = gql`
-  query {
-    getCurrentAssignmentsShown{
-      id
-      description
-      link
-      show
-    }
-  }
-`
-
-export const EDIT_ASSIGNMENT = gql`
-  mutation editAssignment($id: ID!, $description: String, $link: String, $show: Boolean, $assignmentType: String) {
-    editAssignment(id: $id, description: $description, link: $link, show: $show, assignmentType: $assignmentType) {
+export const GET_STUDENT_SHOWN_ASSIGNMENTS = gql`
+  query getStudentShownAssignments($cohort: String!){
+    getStudentShownAssignments(cohort: $cohort){
       id
       description
       link

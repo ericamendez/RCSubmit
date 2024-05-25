@@ -20,9 +20,7 @@ const HackerNews = () => {
                 const individual = await newsResult.json()
                 return individual
             }))
-    
-            console.log(full);
-    
+        
             setData(full)
         }catch (error) {
             console.error('Error fetching data:', error);

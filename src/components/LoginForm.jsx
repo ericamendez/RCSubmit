@@ -38,6 +38,7 @@ const LoginForm = ({setToken, setUser}) => {
             email: data.getUser.email,
             pronouns: data.getUser.pronouns,
             cohort: data.getUser.cohort,
+            submissions: data.getUser.submissions
           })
         } catch (error) {
           console.log(error);

@@ -1,56 +1,28 @@
 import React, { useRef, useEffect, useState } from 'react'
-import '../../styles/studentHome.scss'
+import { useQuery, useMutation } from "@apollo/client"
 import HackerNews from './HackerNews'
 import DailyChallenge from './DailyChallenge'
+import {GET_STUDENT_SHOWN_ASSIGNMENTS} from '../../queries'
+import '../../styles/studentHome.scss'
 
-const StudentView = ({ students }) => {
-    const array = [
-    {
-        name:'Read: https://learn.shayhowe.com (Advanced)',
-        isDone: false
-    },
-    {
-        name:'Read: https://learn.shayhowe.com (Advanced)',
-        isDone: false
-    },
-    {
-        name:'Read: http://learnlayout.com (Again)',
-        isDone: false
-    },
-    {
-        name:'Do: Facebook Newsfeed',
-        isDone: false
-    },
-    {
-        name:'Do: https://flexboxfroggy.com/',
-        isDone: false
-    },
-    {
-        name:'Do: https://mastery.games/post/flexboxzombies2/',
-        isDone: false
-    },
-    {
-        name:'Do: https://cssgridgarden.com/',
-        isDone: false
-    },
-    {
-        name:'Watch: https://www.youtube.com/playlist?list=PL7BImOT2srcGCCjBBwNvU5zaB9F30lWye (1,2, & 3)',
-        isDone: false
-    },
-    {
-        name:'Watch: https://youtu.be/7Oxz060iedY',
-        isDone: false
-    },
-]
+const StudentView = ({ user }) => {
+    
     const pieChartRef = useRef(null);
     const progressFillRef = useRef(null);
     const percentsRef = useRef(null);
+    const [currentWeek, setCurrentWeek] = useState(0);
+    const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null);
+    const [studentsAssignments, setStudentsAssignments] = useState(null);
+    const cohortName = user.cohort;
 
-    useEffect(() => {
-        // Example call to progress function after component has mounted
-        progress(getNumberOfAssignmentsDone());
-    }, []);
-    
+    //Get student current week shown work
+    useQuery(GET_STUDENT_SHOWN_ASSIGNMENTS, {
+        variables: { cohort: cohortName },
+        onCompleted: (data) => {
+            setCurrentWeekAssignments(data.getStudentShownAssignments)
+            setCurrentWeek(data.getStudentShownAssignments[0].week)
+        },
+    });
 
     const progress = (percent) => {
         const ppc = pieChartRef.current;
@@ -66,20 +38,24 @@ const StudentView = ({ students }) => {
       }
     const getNumberOfAssignmentsDone = () => {
         let done = 0;
-        array.forEach(assignment => {
+        currentWeekAssignments.forEach(assignment => {
             if (assignment.isDone) {
                 done++;
             }
         })
 
-        const percent = Math.floor(done / array.length * 100)
+        const percent = Math.floor(done / currentWeekAssignments.length * 100)
         
         return percent;
     }
 
-    const handleCheckboxChange = (index) => {
-        array[index].isDone = !array[index].isDone;
-        progress(getNumberOfAssignmentsDone());
+    // do this to studnets assignments, sepearte from global
+    const handleCheckboxChange = (id) => {
+
+        
+
+        // currentWeekAssignments[index].isDone = !currentWeekAssignments[index].isDone;
+        // progress(getNumberOfAssignmentsDone());
     }
 
     
@@ -87,16 +63,18 @@ const StudentView = ({ students }) => {
         <div className="mainContainer">
             <section className="dueThisWeek">
                 <section>
-                    <h2>Due This Week (Week2):</h2>
+                    <h2>Due This Week (Week {currentWeek}):</h2>
                     <ul>
-                        {array.map((assignment, index) => {
-                            return (
-                            <li key={index}>
-                                <input type="checkbox" onChange={() => handleCheckboxChange(index)} />
-                                <span key={index}>{assignment.name}</span>
-                            </li>
-                        )
-                        })}
+                        { currentWeekAssignments ? 
+                            currentWeekAssignments.map((assignment, index) => {
+                                return (
+                                <li key={index}>
+                                    <input type="checkbox" onChange={() => handleCheckboxChange(assignment.id)} />
+                                    <span key={index}>{assignment.description}</span>
+                                </li>
+                                )
+                            }) : <p>Loading ...</p>
+                        }
                     </ul>
                 </section>
                 <section>

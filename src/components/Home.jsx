@@ -79,7 +79,7 @@ function Home ({user, logout}) {
           {/* either show student home or admin home */}
           {/* student or admin */}
           <Routes>
-              <Route path="/" element={user.accountType === 'admin' || user.accountType === 'owner' ? <AdminView className="inner" /> : <StudentView className="inner" />} />
+              <Route path="/" element={user.accountType === 'admin' || user.accountType === 'owner' ? <AdminView className="inner" /> : <StudentView user={user} className="inner" />} />
               <Route path="/submit" element={<SubmitView />} />
               <Route path="/submissionView" element={user.accountType === 'admin' || user.accountType === 'owner' ? <SubmissionView />: null} />
               <Route path="/resources" element={<ResourcesView />} />
