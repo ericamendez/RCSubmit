@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { useQuery, useMutation } from "@apollo/client"
 import HackerNews from './HackerNews'
 import DailyChallenge from './DailyChallenge'
-import {GET_STUDENT_SHOWN_ASSIGNMENTS} from '../../queries'
+import {GET_STUDENT_SHOWN_ASSIGNMENTS, UPDATE_SUBMISSIONS} from '../../queries'
 import '../../styles/studentHome.scss'
 
 const StudentView = ({ user }) => {
@@ -12,17 +12,33 @@ const StudentView = ({ user }) => {
     const percentsRef = useRef(null);
     const [currentWeek, setCurrentWeek] = useState(0);
     const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null);
-    const [studentsAssignments, setStudentsAssignments] = useState(null);
+    const [studentsSubmissionsCurrentWeek, setStudentsSubmissionsCurrentWeek] = useState(null);
     const cohortName = user.cohort;
 
     //Get student current week shown work
     useQuery(GET_STUDENT_SHOWN_ASSIGNMENTS, {
         variables: { cohort: cohortName },
-        onCompleted: (data) => {
+        onCompleted: async (data) => {
             setCurrentWeekAssignments(data.getStudentShownAssignments)
             setCurrentWeek(data.getStudentShownAssignments[0].week)
+            const doneList = await user.submissions.find(week => week.week === data.getStudentShownAssignments[0].week)
+            setStudentsSubmissionsCurrentWeek(doneList);
+            console.log(doneList);
+            progress(getNumberOfAssignmentsDone(doneList));
         },
     });
+
+    const [updateSubmissions] = useMutation(UPDATE_SUBMISSIONS, {
+        onCompleted: (response) => {
+            console.log('Submission updated')
+            console.log(response.updateSubmissions);
+            setStudentsSubmissionsCurrentWeek(response.updateSubmissions);
+            progress(getNumberOfAssignmentsDone(response.updateSubmissions.assignments));
+        },
+        onError: (error) => {
+            console.log('error', error)
+        }
+    })
 
     const progress = (percent) => {
         const ppc = pieChartRef.current;
@@ -36,26 +52,27 @@ const StudentView = ({ user }) => {
         progressFill.style.transform = `rotate(${deg}deg)`
         percentsSpan.textContent = `${percent}%`;
       }
-    const getNumberOfAssignmentsDone = () => {
-        let done = 0;
-        currentWeekAssignments.forEach(assignment => {
-            if (assignment.isDone) {
-                done++;
-            }
-        })
+    const getNumberOfAssignmentsDone = (doneList) => {
+        let done = doneList.length;
+        console.log('done length', done)
 
+        console.log('currentWeekAssignments length', currentWeekAssignments.length)
         const percent = Math.floor(done / currentWeekAssignments.length * 100)
-        
+        console.log("percent", percent)
         return percent;
     }
 
     // do this to studnets assignments, sepearte from global
-    const handleCheckboxChange = (id) => {
+    const handleCheckboxChange = async (id) => {
+        // Add or delete id from submissions
+        await updateSubmissions({variables: {
+            userID: user.id, 
+            week: currentWeek, 
+            assignmentID: id, 
+            isDone: studentsSubmissionsCurrentWeek && studentsSubmissionsCurrentWeek.assignments.includes(id) ? false : true 
+        }})
 
-        
-
-        // currentWeekAssignments[index].isDone = !currentWeekAssignments[index].isDone;
-        // progress(getNumberOfAssignmentsDone());
+        // currentWeekAssignments[index].isDone = !currentWeekAssignments[index].isDone
     }
 
     
@@ -69,7 +86,10 @@ const StudentView = ({ user }) => {
                             currentWeekAssignments.map((assignment, index) => {
                                 return (
                                 <li key={index}>
-                                    <input type="checkbox" onChange={() => handleCheckboxChange(assignment.id)} />
+                                    <input type="checkbox" 
+                                    checked={studentsSubmissionsCurrentWeek && studentsSubmissionsCurrentWeek.assignments.includes(assignment.id)}  
+                                    onChange={() => handleCheckboxChange(assignment.id)} 
+                                    />
                                     <span key={index}>{assignment.description}</span>
                                 </li>
                                 )

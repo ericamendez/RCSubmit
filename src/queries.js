@@ -159,3 +159,11 @@ export const GET_STUDENT_SHOWN_ASSIGNMENTS = gql`
     }
   }
 `
+
+export const UPDATE_SUBMISSIONS = gql`
+  mutation Mutation($userID: String!, $week: Int!, $assignmentID: String!, $isDone: Boolean!) {
+    updateSubmissions(userID: $userID, week: $week, assignmentID: $assignmentID, isDone: $isDone) {
+      assignments
+    }
+  }
+`
