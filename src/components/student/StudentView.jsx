@@ -13,6 +13,7 @@ const StudentView = ({ user }) => {
     const [currentWeek, setCurrentWeek] = useState(0);
     const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null);
     const [studentsSubmissionsCurrentWeek, setStudentsSubmissionsCurrentWeek] = useState(null);
+    // const [percentDone, setPercentDone] = useState(0);
     const cohortName = user.cohort;
 
     //Get student current week shown work
@@ -23,41 +24,39 @@ const StudentView = ({ user }) => {
             setCurrentWeek(data.getStudentShownAssignments[0].week)
             const doneList = await user.submissions.find(week => week.week === data.getStudentShownAssignments[0].week)
             setStudentsSubmissionsCurrentWeek(doneList);
-            console.log(doneList);
-            progress(getNumberOfAssignmentsDone(doneList));
+            getNumberOfAssignmentsDone(doneList.assignments, data.getStudentShownAssignments)
         },
     });
 
     const [updateSubmissions] = useMutation(UPDATE_SUBMISSIONS, {
         onCompleted: (response) => {
             console.log('Submission updated')
-            console.log(response.updateSubmissions);
             setStudentsSubmissionsCurrentWeek(response.updateSubmissions);
-            progress(getNumberOfAssignmentsDone(response.updateSubmissions.assignments));
+            console.log(currentWeekAssignments);
+            getNumberOfAssignmentsDone(response.updateSubmissions.assignments, currentWeekAssignments)
         },
         onError: (error) => {
             console.log('error', error)
         }
     })
 
-    const progress = (percent) => {
+    const progress = (percentDone) => {
         const ppc = pieChartRef.current;
         const progressFill = progressFillRef.current;
         const percentsSpan = percentsRef.current;
         let deg = 360*percent/100;
-        console.log('deg', deg);
     
         if (percent > 50) {
           ppc.classList.add('gt-50');
         }
         progressFill.style.transform = `rotate(${deg}deg)`
         percentsSpan.textContent = `${percent}%`;
-    }
-
+      }
     const getNumberOfAssignmentsDone = (doneList) => {
         let done = doneList.length;
         console.log('done length', done)
 
+        console.log('currentWeekAssignments length', currentWeekAssignments.length)
         const percent = Math.floor(done / currentWeekAssignments.length * 100)
         console.log("percent", percent)
         return percent;
@@ -97,6 +96,7 @@ const StudentView = ({ user }) => {
                             }) : <p>Loading ...</p>
                         }
                     </ul>
+                    <h2>Announcements:</h2>
                 </section>
                 <section>
                     <h3>Weekly Progress</h3>

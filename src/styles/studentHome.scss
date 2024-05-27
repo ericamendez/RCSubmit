@@ -38,8 +38,8 @@
     content: "";
     position: absolute;
     border-radius: 50%;
-    left: calc(50% - #{$size/2});
-    top: calc(50% - #{$size/2});
+    left: calc(50% - #{calc($size / 2)});
+    top: calc(50% - #{calc($size / 2)});
     width: $size;
     height: $size;
   }
@@ -57,23 +57,23 @@
   }
   .ppc-progress {
     @include circle($size);
-    clip: rect(0, $size, $size, #{$size/2});
+    clip: rect(0, $size, $size, #{calc($size / 2)});
     .ppc-progress-fill {
       @include circle($size);
-      clip: rect(0, #{$size/2}, $size, 0);
+      clip: rect(0, #{calc($size / 2)}, $size, 0);
       background: rgb(206,0,11);
       transform: rotate(60deg);
     }
     .gt-50 & {
-      clip: rect(0, #{$size/2}, $size, 0);
+      clip: rect(0, #{calc($size / 2)}, $size, 0);
       .ppc-progress-fill {
-        clip: rect(0, $size, $size, #{$size/2});
+        clip: rect(0, $size, $size, #{calc($size / 2)});
         background: #E5E5E5;
       }
     }
   }
   .ppc-percents {
-    @include circle(#{$size/1.15});
+    @include circle(#{calc($size / 1.15)});
     background: #fff;
     text-align: center;
     display: table;
