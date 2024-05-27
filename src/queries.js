@@ -84,6 +84,7 @@ export const GET_WEEKS_ASSIGNMENTS = gql`
                 description
                 link
                 show
+                assignmentType
         }
     }
 `

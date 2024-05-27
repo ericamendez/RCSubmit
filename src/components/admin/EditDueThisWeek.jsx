@@ -7,7 +7,7 @@ import { faPenToSquare, faTrash, faCircleCheck } from "@fortawesome/free-solid-s
 const DueThisWeek = ({currentWeek}) => {
     const [currentWeekAssignments, setCurrentWeekAssignments] = useState(null)
     const [isAdd, setIsAdd] = useState(false)
-    const [isEdit, setIsEdit] = useState('')
+    const [isEditID, setIsEditID] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
     const [assignmentType, setAssignmentType] = useState('read')
@@ -92,6 +92,27 @@ const DueThisWeek = ({currentWeek}) => {
         },
       });
 
+      const handleEditAssignment = async (e, id, description, link) => {
+        e.preventDefault()
+        if(isEditID === id) {
+            setIsEditID('')
+            return
+        }
+        setIsEditID(id) 
+        setDescription(description)
+        setLink(link)
+    }
+    
+    const handleEditAssignmentSubmit = async (e, id, show) => {
+        e.preventDefault()
+        await editAssignment({ variables: { id, description, link, show, assignmentType } })
+      }
+
+    const handleChange = (event, description) => {
+
+        setDescription(event.target.value);
+    };
+
     return (
         <section className="editDueThisWeek">
                     <h2>Due This Week (Week {currentWeek}):</h2>
@@ -105,9 +126,32 @@ const DueThisWeek = ({currentWeek}) => {
                                     </p>
                                 </div>
                                 <div className="editAssignmentIcons">
-                                    <FontAwesomeIcon icon={faPenToSquare} onClick={() => setIsEdit(!isEdit) } />
+                                    <FontAwesomeIcon icon={faPenToSquare} className={assignment.id === isEditID ? "penToSquare editSelected" : "penToSquare"} onClick={(e) => handleEditAssignment(e, assignment.id, assignment.description, assignment.link) } />
                                     <FontAwesomeIcon icon={faTrash} className="trash" onClick={ () => {deleteAssignment({ variables: { id: assignment.id } })} } />
                                 </div>
+                                { isEditID === assignment.id ?
+                                    <form className="editForm" onSubmit={(e) => handleEditAssignmentSubmit(e, assignment.id, assignment.show)}>
+                                        <ul>
+                                            <li>
+                                                Description: 
+                                                <input type="text" value={description} onChange={({ target }) => setDescription(target.value)} />
+                                            </li>
+                                            <li>
+                                                Link: 
+                                                <input type="text" value={link} onChange={({ target }) => setLink(target.value)}  />
+                                            </li>
+                                            <li>
+                                                Assignment Type:
+                                                <select onChange={({ target }) => setAssignmentType(target.value)}>
+                                                    { assignmentTypes.map((type, i) => type===assignment.assignmentType ? <option key={i} value={type} selected >{type}</option> : <option key={i} value={type} >{type}</option>)}
+                                                </select>
+                                            </li>
+                                            <li className="right">
+                                                <button>Submit</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                : null }
                             </li>
                         )): null }
                     </ul>

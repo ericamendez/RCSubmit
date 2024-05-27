@@ -225,7 +225,7 @@ body::-webkit-scrollbar {
     list-style: none;
 }
 
-.editDueThisWeek .assignmentContainer li{
+.editDueThisWeek .assignmentContainer > li{
     display: grid;
     grid-template-columns: 2fr 1fr;
 }
@@ -249,6 +249,7 @@ body::-webkit-scrollbar {
 button, .buttonStyle {
     border-radius: 5px;
     padding: 5px 10px;
+    font-weight: bold;
 }
 
 .editAssignmentIcons{

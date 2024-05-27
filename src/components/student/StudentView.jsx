@@ -45,18 +45,19 @@ const StudentView = ({ user }) => {
         const progressFill = progressFillRef.current;
         const percentsSpan = percentsRef.current;
         let deg = 360*percent/100;
+        console.log('deg', deg);
     
         if (percent > 50) {
           ppc.classList.add('gt-50');
         }
         progressFill.style.transform = `rotate(${deg}deg)`
         percentsSpan.textContent = `${percent}%`;
-      }
+    }
+
     const getNumberOfAssignmentsDone = (doneList) => {
         let done = doneList.length;
         console.log('done length', done)
 
-        console.log('currentWeekAssignments length', currentWeekAssignments.length)
         const percent = Math.floor(done / currentWeekAssignments.length * 100)
         console.log("percent", percent)
         return percent;
@@ -99,7 +100,7 @@ const StudentView = ({ user }) => {
                 </section>
                 <section>
                     <h3>Weekly Progress</h3>
-                    <div ref={pieChartRef} className="progress-pie-chart" data-percent="63">
+                    <div ref={pieChartRef} className="progress-pie-chart" data-percent="50">
                     <div className="ppc-progress">
                         <div ref={progressFillRef} className="ppc-progress-fill"></div>
                     </div>
