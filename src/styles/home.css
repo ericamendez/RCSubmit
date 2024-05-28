@@ -249,7 +249,13 @@ body::-webkit-scrollbar {
 button, .buttonStyle {
     border-radius: 5px;
     padding: 5px 10px;
-    font-weight: bold;
+    border: none;
+    transition: 500ms;
+}
+
+button:hover, .buttonStyle:hover{
+    cursor: pointer;
+    background-color:  #a29bfe;
 }
 
 .editAssignmentIcons{

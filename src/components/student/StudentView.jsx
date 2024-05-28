@@ -44,22 +44,20 @@ const StudentView = ({ user }) => {
         const ppc = pieChartRef.current;
         const progressFill = progressFillRef.current;
         const percentsSpan = percentsRef.current;
-        let deg = 360*percent/100;
-    
-        if (percent > 50) {
+        let deg = 360*percentDone/100;
+
+        if (percentDone > 50) {
           ppc.classList.add('gt-50');
         }
         progressFill.style.transform = `rotate(${deg}deg)`
-        percentsSpan.textContent = `${percent}%`;
-      }
-    const getNumberOfAssignmentsDone = (doneList) => {
+        percentsSpan.textContent = `${percentDone}%`;
+    }
+    
+    const getNumberOfAssignmentsDone = (doneList, allList) => {
         let done = doneList.length;
-        console.log('done length', done)
 
-        console.log('currentWeekAssignments length', currentWeekAssignments.length)
-        const percent = Math.floor(done / currentWeekAssignments.length * 100)
-        console.log("percent", percent)
-        return percent;
+        const percent = Math.floor(done / allList.length * 100)
+        progress(percent)
     }
 
     // do this to studnets assignments, sepearte from global
@@ -100,7 +98,7 @@ const StudentView = ({ user }) => {
                 </section>
                 <section>
                     <h3>Weekly Progress</h3>
-                    <div ref={pieChartRef} className="progress-pie-chart" data-percent="50">
+                    <div ref={pieChartRef} className="progress-pie-chart" data-percent="63">
                     <div className="ppc-progress">
                         <div ref={progressFillRef} className="ppc-progress-fill"></div>
                     </div>
