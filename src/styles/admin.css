@@ -1,69 +1,68 @@
-.cohortDivide{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.cohortDivide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-.green{
-    padding-right: 10px;
-    color: rgb(107, 191, 107);
-    font-size: 1.2em;
+.green {
+  padding-right: 10px;
+  color: rgb(107, 191, 107);
+  font-size: 1.2em;
 }
 
 .check {
-    padding-right: 10px;
-    transition: all 300ms;
+  padding-right: 10px;
+  transition: all 300ms;
 }
 
-.check:hover{
-    color: rgb(153, 205, 153);
-    font-size: 1.2em;
+.check:hover {
+  color: rgb(153, 205, 153);
+  font-size: 1.2em;
 }
 
 .trash {
-    transition: all 100ms;
+  transition: all 100ms;
 }
-.trash:hover{
-    color: rgb(155, 39, 39);
-    /* color: rgb(153, 205, 153); */
-    font-size: 1.2em;
-}
-
-.penToSquare:hover{
-    color: rgb(70, 123, 215);
-    font-size: 1.2em;
-
+.trash:hover {
+  color: rgb(155, 39, 39);
+  /* color: rgb(153, 205, 153); */
+  font-size: 1.2em;
 }
 
-.editSelected{
-    color: rgb(70, 123, 215);
+.penToSquare:hover {
+  color: rgb(70, 123, 215);
+  font-size: 1.2em;
 }
 
-.editForm{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-}
-.editForm input{
-    width: 100%;
-    margin: 10px;
-    padding: 5px;
-    margin-bottom: 15px;
-}
-.editForm button{
-    padding: 5px 10px;
-    margin: 10px 0 20px 0;
-    background-color: rgb(70, 123, 215);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.editSelected {
+  color: rgb(70, 123, 215);
 }
 
-.editForm select{
-    margin: 10px;
-    padding: 5px;
+.editForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+.editForm input {
+  width: 100%;
+  margin: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+.editForm button {
+  padding: 5px 10px;
+  margin: 10px 0 20px 0;
+  background-color: rgb(70, 123, 215);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.right{
-    text-align: right;
+.editForm select {
+  margin: 10px;
+  padding: 5px;
+}
+
+.right {
+  text-align: right;
 }

@@ -1,14 +1,13 @@
-import SubmissionTable from "./SubmissionTable"
-import '../../styles/submission.css'
+import SubmissionTable from "./SubmissionTable";
+import "../../styles/submission.css";
 
 function SubmissionView() {
+  return (
+    <div className="subViewContainer">
+      <h2>Submissions 2024B</h2>
+      <SubmissionTable />
+    </div>
+  );
+}
 
-    return (
-      <div className="subViewContainer">
-        <h2>Submissions 2024B</h2>
-        <SubmissionTable />
-      </div>
-    )
-  }
-  
-  export default SubmissionView
+export default SubmissionView;

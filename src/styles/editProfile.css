@@ -1,69 +1,68 @@
-.editContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2em;
-    margin: 30px 30px 0 9%;
+.editContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2em;
+  margin: 30px 30px 0 9%;
 }
 
 .editContainer > section {
-    background-color: rgba(50, 50, 50, 0.8);
-    border-radius: 30px;
-    padding: 10px 40px;
+  background-color: rgba(50, 50, 50, 0.8);
+  border-radius: 30px;
+  padding: 10px 40px;
 }
 
 h1 {
-    color: rgb(206,0,11)
+  color: rgb(206, 0, 11);
 }
 
-.editInfo{
-    text-align: left;
+.editInfo {
+  text-align: left;
 }
 
 .editInfo ul {
-    padding-top: 35px;
-    list-style: none;
-    padding-left: 0;
+  padding-top: 35px;
+  list-style: none;
+  padding-left: 0;
 }
 
 .editInfo li {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .editInfo .navIcons {
-    text-align: right;
+  text-align: right;
 }
 
 .editInfo .right {
-    text-align: right;
+  text-align: right;
 }
 
 .editInfo .right:hover {
-    color: rgb(206,0,11)
+  color: rgb(206, 0, 11);
 }
 
-.picture{
-    text-align: center;
+.picture {
+  text-align: center;
 }
 
-.picture img{
-    object-fit: cover;
-    width: 50%;
-    padding: 40px 20px 20px 20px;
-
+.picture img {
+  object-fit: cover;
+  width: 50%;
+  padding: 40px 20px 20px 20px;
 }
 
 .upload {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
-input[type=file]::file-selector-button {
-    border-radius: 5px;
-    padding: 5px 10px;
-    background-color: #a29bfe;
-    transition: 1s;
-  }
-  
-  input[type=file]::file-selector-button:hover {
-    background-color: #81ecec;
-    border: 2px solid #00cec9;
-  }
+input[type="file"]::file-selector-button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #a29bfe;
+  transition: 1s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #81ecec;
+  border: 2px solid #00cec9;
+}
