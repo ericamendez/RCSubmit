@@ -1,9 +1,11 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
-import { useApolloClient, useQuery } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
+import { QueryClient } from "@tanstack/react-query";
 
 function App({ pictureURL}) {
   const [user, setUser] = useState(null);
@@ -11,6 +13,15 @@ function App({ pictureURL}) {
   const [id, setId] = useState(null);
 
   const client = useApolloClient();
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+        cacheTime: Infinity,
+      },
+    },
+  });
 
   const logout = () => {
     setToken(null);
@@ -26,6 +37,7 @@ function App({ pictureURL}) {
     );
   }
 
+  // <QueryClientProvider client={queryClient}>
   return (
     <Router>
       {user ? (
