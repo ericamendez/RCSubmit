@@ -5,8 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
-import { QueryClient } from "@tanstack/react-query";
-
+``
 function App({ pictureURL}) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
@@ -37,19 +36,20 @@ function App({ pictureURL}) {
     );
   }
 
-  // <QueryClientProvider client={queryClient}>
   return (
     <Router>
-      {user ? (
-        <Home logout={logout} user={user} pictureURL={pictureURL} />
-      ) : (
-        <LoginForm
-          setToken={setToken}
-          setError={"notify"}
-          setUser={setUser}
-          setId={setId}
-        />
-      )}
+      <QueryClientProvider client={queryClient}>
+        {user ? (
+          <Home logout={logout} user={user} pictureURL={pictureURL} />
+        ) : (
+          <LoginForm
+            setToken={setToken}
+            setError={"notify"}
+            setUser={setUser}
+            setId={setId}
+          />
+        )}
+      </QueryClientProvider>
     </Router>
   );
 }
