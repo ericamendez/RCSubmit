@@ -66,20 +66,6 @@ const AdminView = () => {
         </section>
       </section>
       <CohortSettings currentCohort={currentCohort} />
-      <section>
-        <section>
-          <p>(each student will be associated to work the submit each week.)</p>
-          <p>
-            (every week we move forward to will open a new group of possible
-            submissions)
-          </p>
-
-          <p>
-            when students submit, show green if assigment submitted on time,
-            yellow if submitted past due date
-          </p>
-        </section>
-      </section>
     </div>
   );
 };
