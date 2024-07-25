@@ -8,7 +8,7 @@ A platform to keep track of student work and progress and streamline administrat
 
 ## Admin Homepage
 
-![Screenshot of RC Submit Admin Homepage](admin-homepage.png)
+![Screenshot of RC Submit Admin Homepage](admin-homepage2.png)
 
 ### Backend
 
