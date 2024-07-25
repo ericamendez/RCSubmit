@@ -9,8 +9,10 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
-const uri = "http://localhost:4001/graphql";
-const pictureURL = "http://localhost:4001/uploads/";
+const uri = "https://rcsubmit.onrender.com/graphql"
+//"http://localhost:4001/graphql";
+const pictureURL = "https://rcsubmit.onrender.com/uploads/";
+//"http://localhost:4001/uploads/";
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("user-token");
